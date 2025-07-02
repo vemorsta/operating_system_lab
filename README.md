@@ -17,7 +17,9 @@ password for GRUB using PBKDF2 encryption.
 
 Run the following command to generate a hashed password:
 
-`grub-mkpasswd-pbkdf2`
+```bash
+grub-mkpasswd-pbkdf2
+```
 
 Copy the generated hash.
 
@@ -25,42 +27,52 @@ Copy the generated hash.
 
 Open the GRUB configuration file for editing:
 
-`sudo nano /etc/grub.d/00_header`
+```bash 
+sudo nano /etc/grub.d/00_header
+```
 
 Add the following lines at the end of the file:
 
-<pre>```cat \<\< EOF
+```bash
+cat \<\< EOF
 
 set superusers=\"\<paste-your-username-here\>\"
 
 password_pbkdf2 \<paste-your-username-here\>
 \<paste-your-hashed-password-here\>
 
-EOF```</pre>
+EOF
+```
 
 Save the file:
 
-- Press` CTRL + O ` and hit ` Enter `
+- Press ` CTRL + O ` and hit ` Enter `
 
-- Press ` CTRL + X `to exit
+- Press ` CTRL + X ` to exit
 
 **3. Update GRUB Configuration**
 
 Run the following command to update GRUB:
 
-`sudo update-grub2`
+```bash
+sudo update-grub2
+```
 
 **4. Verify Configuration**
 
 Check the GRUB configuration file to ensure the changes were applied:
 
-`sudo cat /boot/grub/grub.cfg`
+```bash
+sudo cat /boot/grub/grub.cfg
+```
 
 **5. Reboot System**
 
 Finally, reboot your system to apply the changes:
 
-`sudo reboot`
+```bash
+sudo reboot
+```
 
 After rebooting, GRUB will now require authentication for administrative
 actions. 
