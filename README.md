@@ -1,160 +1,58 @@
-**Linux Boot Logs and System Information**
+**Difference Between init and telinit Commands in Linux**
 
-This document provides a step-by-step guide to extracting and analyzing
-various boot logs and system information on a Linux machine.
+In traditional SysVinit-based Linux systems, two important commands are
+used to manage **runlevels**: init and telinit.
 
-**Steps to Retrieve Boot Logs**
+**Key Differences**
 
-**1. View Boot Messages in Real-time**
+  ------------------------------------------------------------------------
+  **Feature**   **init**                     **telinit**
+  ------------- ---------------------------- -----------------------------
+  Main Role     Main process responsible for Interface to send commands to
+                booting and managing         the init process
+                runlevels (PID 1)            
 
-Run the following command to view boot logs interactively:
+  Execution     Executed directly by the     Used to communicate
+                system or administrator      with init during system
+                                             runtime
 
-```bash
-sudo dmesg | less
-```
-**2. Save Boot Logs to a File**
+  Common Usage  Used in system boot or       Used to change runlevel while
+                manually (e.g., init 3)      the system is running
+                                             (e.g., telinit 5)
 
-To save the boot logs for later analysis, use:
+  Dependency    Works independently          Depends on init (usually a
+                                             symbolic link to init)
+  ------------------------------------------------------------------------
 
-```bash
-sudo dmesg > boot_logs.txt
-```
-**3. Verify the File Existence**
+**Checking the Link Between the Two**
 
-Check the saved file using:
+You can verify that telinit is a symbolic link to init using the
+following command:
 
-```bash
-ls
+ls -l /sbin/init /sbin/telinit
 
-nano boot_logs.txt
-```
-**4. View System Boot Log**
+Example output:
 
-To check the boot log stored in system logs, run:
+lrwxrwxrwx 1 root root 4 Apr 1 /sbin/telinit -\> init
 
-```bash
-sudo cat /var/log/boot.log
-```
-**5. Search for BIOS-related Messages**
+-rwxr-xr-x 1 root root 123456 Apr 1 /sbin/init
 
-Extract BIOS-related messages from the boot log using:
+![Annotation 2025-05-23 173855](./media/media/image1.png){width="6.5in"
+height="1.3020833333333333in"}
 
-```bash
-sudo dmesg | grep -i "bios"
-```
-Save these messages to a file:
+**Usage Examples**
 
-```bash
-sudo dmesg | grep -i "bios" > bios.txt
-```
-**6. Verify BIOS Log File**
+- Switch to multi-user (text) runlevel:
 
-Check if the file was created and examine its contents:
+![Annotation 2025-05-23
+174056](./media/media/image2.png){width="6.479166666666667in"
+height="1.2291666666666667in"}sudo telinit 3
 
-```bash
-ls
+- Switch to graphical runlevel:
 
-nano bios.txt
-```
-**GRUB Configuration Analysis**
+![Annotation 2025-05-23 174515](./media/media/image3.png){width="6.5in"
+height="3.375in"}sudo init 5
 
-**7. View GRUB Configuration File**
+- Check current and previous runlevel:
 
-To inspect the current GRUB configuration, run:
-
-```bash
-sudo cat /boot/grub/grub.cfg
-```
-**8. Search for GRUB Superuser Settings**
-
-Find GRUB superuser settings in the configuration file:
-
-```bash
-sudo grep -i -A 3 -B 3 'superusers' /boot/grub/grub.cfg
-```
-**9. Save GRUB Configuration to a Report**
-
-Store the GRUB configuration in a separate file for analysis:
-
-```bash
-sudo cat /boot/grub/grub.cfg > grub_report.txt
-```
-**10. Verify GRUB Report File**
-
-Check if the file is successfully created and view its contents:
-
-```bash
-ls
-
-nano grub_report.txt
-```
-**Hardware and BIOS Information**
-
-**11. Retrieve System Hardware Information**
-
-Use `dmidecode` to extract detailed hardware information:
-
-```bash
-sudo dmidecode
-```
-Save the output to a file:
-
-```bash
-sudo dmidecode > logs.txt
-```
-**12. Verify Logs File**
-
-Check the created file:
-
-```bash
-ls
-
-nano logs.txt
-```
-**13. Retrieve BIOS Information Only**
-
-To extract only BIOS-related details, use:
-
-```bash
-sudo dmidecode -t bios
-```
-Save this information to a separate file:
-
-```bash
-sudo dmidecode -t bios > bios_logs.txt
-```
-**14. Verify BIOS Logs File**
-
-Check if the file was created and inspect its contents:
-
-```bash
-ls
-
-nano bios_logs.txt
-```
-**Journal Logs**
-
-**15. View GDM (GNOME Display Manager) Boot Logs**
-
-To analyze the logs related to the GNOME Display Manager:
-
-```bash
-sudo journalctl -b -u gdm
-```
-By following these steps, you can extract detailed information regarding
-system boot logs, BIOS details, and GRUB settings for further analysis
-and troubleshooting.
-
-![Screenshot from 2025-05-23
-16-11-15](./media/media/image1.png)
-![](./media/media/image2.png)
-
-
-![Screenshot from
-2025-05-23 16-11-38.png](./media/media/image3.png)![Screenshot from 2025-05-23
-16-11-23](./media/media/image4.png)
-
-![Screenshot from
-2025-05-23
-16-14-31.png](./media/media/image5.png)
-
+runlevel
