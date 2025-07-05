@@ -6,25 +6,13 @@ used to manage **runlevels**:
 
 **Key Differences**
 
-  ------------------------------------------------------------------------
-  |**Feature** |  **init**                  |   **telinit**               |
+| Feature        | `init`                                                                 | `telinit`                                                                 |
+|----------------|------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| **Main Role**   | Main process responsible for booting and managing runlevels (PID 1)   | Interface to send commands to the `init` process                          |
+| **Execution**   | Executed directly by the system or administrator                      | Used to communicate with `init` during system runtime                     |
+| **Common Usage**| Used in system boot or manually (e.g., `init 3`)                      | Used to change runlevel while the system is running (e.g., `telinit 5`)   |
+| **Dependency**  | Works independently                                                   | Depends on `init`<br>(usually a symbolic link to `init`)                  |
 
-  |:-------------|: ----------------------------:| -----------------------------:|
-  |Main Role   |  Main process responsible for |Interface to send commands to
-                booting and<br> managing         the` init `<br>process|
-                runlevels (PID 1)            
-
-  Execution   |  Executed directly by the   |  Used to communicate
-                system or <br>administrator   with` init `during <br>system
-                                             runtime|
-
-  Common Usage | Used in system boot or   |   Used to change runlevel while
-                manually (e.g.,` init3`)      the system is <br>running
-                                             (e.g.,` telinit 5`)|
-
-  Dependency |   Works independently    |    Depends on` init `(usually a
-                                             symbolic link to<br>` init`)|
-  ------------------------------------------------------------------------
 
 **Checking the Link Between the Two**
 
