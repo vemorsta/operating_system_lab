@@ -34,7 +34,7 @@ systemctl list-units --type=service
 ```bash
 ls /etc/init.d/
 ```
-<img src="media/media/image2.png" width="920" height="150">
+<img src="media/media/image2.png" width="920" height="100">
 <img src="media/media/image1.png" width="920" height="400">
 
 
