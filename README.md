@@ -19,9 +19,9 @@
 ```bash
 ps -p 1 -o comm=
 ```
-- If output is systemd, you are using systemd.
+- If output is` systemd`, you are using systemd.
 
-- If output is init or sysv, you are on SysVinit.
+- If output is `init `or` sysv`, you are on SysVinit.
 
 **2. List services**
 
@@ -35,9 +35,9 @@ systemctl list-units --type=service
 ls /etc/init.d/
 ```
 ![Annotation 2025-05-23
-175208](./media/media/image1.png)
+175208](./media/media/image2.png)
 ![Annotation 2025-05-23
-175311](./media/media/image2.png)
+175311](./media/media/image1.png)
 
 **3. Start, Stop, Enable, Disable a Service**
 
