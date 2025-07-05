@@ -34,8 +34,7 @@ systemctl list-units --type=service
 ```bash
 ls /etc/init.d/
 ```
-![Annotation 2025-05-23
-175208](./media/media/image2.png)
+<img src="media/media/image2.png" width="920">
 ![Annotation 2025-05-23
 175311](./media/media/image1.png)
 
